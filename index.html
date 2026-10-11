@@ -10,11 +10,12 @@
  --green:#123d32;--green2:#195b49;--leaf:#2d8a68;--mint:#e7f5ee;--red:#e24f5b;
  --bg:#f4f7f5;--paper:#fff;--ink:#182c26;--muted:#708078;--line:#e0e9e3;
  --amber:#f0b44c;--blue:#5683ca;--shadow:0 12px 32px rgba(18,61,50,.07);--radius:20px;
-}
+
+  --card: #f7faf8;}
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
 body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,"Noto Sans Bengali","SolaimanLipi","Kalpurush",system-ui,sans-serif;font-size:15px;line-height:1.55}
-body.dark{--bg:#101a17;--paper:#182520;--ink:#edf7f1;--muted:#9aaca2;--line:#2a3c33;--mint:#203d30;--shadow:0 12px 32px rgba(0,0,0,.20)}
+body.dark{--card:#14241e;--bg:#101a17;--paper:#182520;--ink:#edf7f1;--muted:#9aaca2;--line:#2a3c33;--mint:#203d30;--shadow:0 12px 32px rgba(0,0,0,.20)}
 button,input,select,textarea{font:inherit}
 button{cursor:pointer}
 button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px solid #68b89b;outline-offset:2px}
@@ -175,7 +176,7 @@ footer{margin-top:28px;border-top:1px solid var(--line);padding-top:15px;color:v
 .profile-info{min-width:0;flex:1}.profile-info h2{margin:0 0 3px;font-size:22px}.profile-info p{margin:0;color:#d1e8da;overflow-wrap:anywhere}
 .google-btn{display:flex;align-items:center;justify-content:center;gap:10px;background:#fff;color:#303030;border:1px solid #dadce0;border-radius:12px;padding:12px 16px;font-weight:800;width:100%;box-shadow:0 2px 5px #0000000b}
 .google-mark{font-weight:950;font-size:19px;color:#4285f4}.profile-status{padding:12px 14px;border-radius:12px;background:var(--mint);color:var(--green2);font-size:13px;margin:12px 0}
-.profile-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}.profile-grid .card:first-child{background:linear-gradient(180deg,var(--paper),var(--mint));border-color:#cfe5d8}.profile-grid .card:first-child .card-head{margin-bottom:16px}.profile-grid .card:first-child .google-btn{min-height:50px;font-size:15px}.profile-grid .card{min-width:0}.firebase-config{display:grid;gap:9px}.firebase-config label{font-size:12px;color:var(--muted);font-weight:800}.firebase-config .field{width:100%}
+.profile-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}.profile-grid .card{min-width:0}.firebase-config{display:grid;gap:9px}.firebase-config label{font-size:12px;color:var(--muted);font-weight:800}.firebase-config .field{width:100%}
 @media(max-width:640px){.profile-grid{grid-template-columns:1fr}.profile-hero{align-items:flex-start}.profile-avatar{width:60px;height:60px}}
 </style>
 </head>
@@ -409,11 +410,11 @@ const MAP_PIXEL_POSITIONS = {"Bagerhat": [705, 1280], "Bandarban": [1640, 1600],
   </div>
   <div class="profile-grid">
     <div class="card">
-      <div class="card-head"><div><h2>তোর যাত্রা শুরু হোক</h2><p class="muted small">এক ক্লিকেই Google account দিয়ে সাইন ইন কর।</p></div></div>
-      <div id="authStatus" class="profile-status">তোর ভ্রমণের জন্য এক জায়গায়—Google দিয়ে সহজে লগইন কর।</div>
+      <div class="card-head"><div><h2>Google / Gmail Login</h2><p class="muted small">Google-এর নিরাপদ sign-in window ব্যবহার হবে।</p></div></div>
+      <div id="authStatus" class="profile-status">লগইন করা নেই। Google দিয়ে পরিচয় যাচাই করা যাবে।</div>
       <button id="googleLoginBtn" class="google-btn"><span class="google-mark">G</span> Continue with Google</button>
       <button id="googleLogoutBtn" class="secondary-btn" style="width:100%;margin-top:9px" hidden>লগআউট</button>
-      <p class="muted small" style="margin-top:12px;text-align:center">তোর Google account ব্যবহার করে নিরাপদে সাইন ইন কর। তোর password এই ওয়েবসাইটে দিতে হবে না।</p>
+      <p class="muted small" style="margin-top:12px">Firebase config এই অ্যাপে নির্ধারিত। Google Login শুধু পরিচয় যাচাই করে; ক্লাউড ডেটা সিঙ্ক এখনো চালু নয়।</p>
     </div>
     <div class="card">
       <div class="card-head"><div><h2>তোর ট্রাভেল প্রোফাইল</h2><p class="muted small">এই ডিভাইসের বর্তমান অগ্রগতি</p></div></div>
@@ -423,7 +424,7 @@ const MAP_PIXEL_POSITIONS = {"Bagerhat": [705, 1280], "Bandarban": [1640, 1600],
       </div>
       <div class="setting-field"><label for="profileNickname">প্রদর্শনের নাম (লোকাল)</label><input class="field" id="profileNickname" maxlength="60" placeholder="তোর নাম" /></div>
       <button id="saveProfileNickname" class="primary-btn">নাম সেভ করো</button>
-      <p class="muted small" style="margin-top:10px">Google login পরিচয় যাচাই করবে। বর্তমান ট্রিপের ডেটা এখনো এই ব্রাউজারেই সেভ হয়; বিভিন্ন ডিভাইসে সিঙ্ক করতে আলাদা cloud database যোগ করতে হবে।</p>
+      <p class="muted small" style="margin-top:10px">Google Login শুধু পরিচয় যাচাই করে। এই সংস্করণে ট্রিপ ডেটা এখনও এই ব্রাউজারে সেভ হয়; বিভিন্ন ডিভাইসে সিঙ্কের জন্য পরের ধাপে Cloud Firestore যুক্ত করতে হবে।</p>
     </div>
   </div>
 </section>
@@ -439,18 +440,18 @@ const MAP_PIXEL_POSITIONS = {"Bagerhat": [705, 1280], "Bandarban": [1640, 1600],
       </div>
       <div class="card">
         <div class="card-head"><div><h2>ডেটা ব্যাকআপ ও রিস্টোর</h2><p class="muted small">অন্য PC-তে বা ব্রাউজার রিসেটের আগে ব্যাকআপ রাখো।</p></div></div>
-        <p class="muted small">এই সংস্করণ লোকাল ব্রাউজারে ডেটা সংরক্ষণ করে; Google Drive-এ স্বয়ংক্রিয় সিঙ্ক নেই।</p>
+        <p class="muted small">এখন অগ্রগতি এই ব্রাউজারে সেভ হয়; ক্লাউড সিঙ্ক এখনো চালু নয়। রুট, ভাড়া ও দৈনিক খরচ পরিকল্পনামূলক অনুমান—যাত্রার আগে সরকারি/পরিবহন সূত্রে সময়, ভাড়া, প্রবেশ-সময় ও নিরাপত্তা যাচাই করো।</p>
         <div class="grid" style="gap:9px"><button class="primary-btn" id="exportBackup">JSON ব্যাকআপ ডাউনলোড</button><label class="secondary-btn" style="text-align:center">JSON ব্যাকআপ Restore <input type="file" id="importBackup" accept=".json,application/json" style="display:none"></label><button class="secondary-btn" id="exportTripCsv">৯০ দিনের রুট CSV</button></div>
         <div class="setting-field"><label for="tripNotes">সাধারণ নোট</label><textarea id="tripNotes" rows="4" placeholder="বুকিং নম্বর নয়, সাধারণ পরিকল্পনার নোট এখানে রাখো।"></textarea></div>
         <button class="danger-btn" id="clearAll">সব অগ্রগতি মুছে ফেলো</button>
       </div>
     </div>
     <div class="card section">
-      <div class="card-head"><div><h2>এই সংস্করণে কী আছে</h2><p class="muted small">এটি multi-screen local-first prototype; hosted website নয়।</p></div><span class="pill green">v7 · Redesigned</span></div>
+      <div class="card-head"><div><h2>এই সংস্করণে কী আছে</h2><p class="muted small">এটি multi-screen local-first prototype; hosted website নয়।</p></div><span class="pill green">v12 · Travel companion</span></div>
       <div class="grid grid-3" id="featureList"></div>
     </div>
   </section>
-  <footer>পথচিত্র · বাংলাদেশ ৬৪ জেলার ভ্রমণ পরিকল্পক · রুট ও খরচ পরিকল্পনা-খসড়া; নিশ্চিত লাইভ বুকিং নয়। জেলা সীমানা লোডের জন্য ইন্টারনেট লাগতে পারে। Map data source: <a href="https://gis.dghs.gov.bd/server/rest/services/Hosted/bgd_admbnda_adm2_bbs_20201113/FeatureServer/0" target="_blank" rel="noreferrer">DGHS GIS district boundary service</a>.</footer>
+  <footer>পথচিত্র · বাংলাদেশ ৬৪ জেলার ভ্রমণ পরিকল্পক · রুট, খরচ ও সময় পরিকল্পনা-খসড়া; যাচাই ছাড়া নিশ্চিত তথ্য নয়, লাইভ বুকিং নয়। জেলা সীমানা লোডের জন্য ইন্টারনেট লাগতে পারে। Map data source: <a href="https://gis.dghs.gov.bd/server/rest/services/Hosted/bgd_admbnda_adm2_bbs_20201113/FeatureServer/0" target="_blank" rel="noreferrer">DGHS GIS district boundary service</a>.</footer>
 </main>
 </div>
 
@@ -516,33 +517,54 @@ const normalize = s => String(s||"").toLowerCase().replace(/[^a-z0-9]/g,"");
 const ALIASES = {"barisal":"barishal","bogra":"bogura","comilla":"cumilla","chittagong":"chattogram","coxsbazar":"coxs bazar","jessore":"jashore","nawabganj":"chapainawabganj"};
 function canonical(s){let n=normalize(s);const aliases={"barisal":"barishal","bogra":"bogura","comilla":"cumilla","chittagong":"chattogram","jessore":"jashore","nawabganj":"chapainawabganj","coxs bazar":"coxs bazar","coxsbazar":"coxs bazar","coxsbazar":"coxs bazar"};return aliases[n]||n}
 const defaults = {
- tripName:"বাংলাদেশ ৬৪ জেলা ভ্রমণ",startDate:"",duration:90,budgetCap:450000,travelers:1,theme:"light",tripNotes:"",
+ tripName:"বাংলাদেশ ৬৪ জেলা ভ্রমণ",startDate:"",duration:90,budgetCap:450000,travelers:1,theme:"light",tripNotes:"",profileNickname:"",
  days:{},districtStatus:{},packing:{},prep:{},favorites:[],diaryEntries:[],budgets:BUDGET_DEFAULTS.map(x=>({...x}))
 };
 let state = structuredCloneSafe(defaults);
 let selectedDistrict = null, mapReady = false, calendarMode = false, toastTimer = null;
 const pageTitles = {dashboard:["MY TRIP / OVERVIEW","ড্যাশবোর্ড"],planner:["PLAN / CALENDAR","ট্রিপ ক্যালেন্ডার"],districts:["PROGRESS / DISTRICTS","৬৪ জেলার ম্যাপ"],budget:["MONEY / BUDGET","বাজেট ও খরচ"],packing:["PREPARE / PACKING","ব্যাকপ্যাক চেকলিস্ট"],places:["EXPLORE / PLACES","দর্শনীয় স্থান ও নিরাপত্তা"],diary:["MEMORIES / ACHIEVEMENTS","ট্রাভেল ডায়েরি ও ব্যাজ"],profile:["MY TRAVEL ID / ACCOUNT","প্রোফাইল ও Gmail লগইন"],settings:["SETTINGS / BACKUP","সেটিংস ও ব্যাকআপ"]};
 function structuredCloneSafe(obj){return JSON.parse(JSON.stringify(obj))}
+function safeStorageGet(kind,key){try{const storage=kind==='session'?window.sessionStorage:window.localStorage;return storage.getItem(key)}catch(_e){return null}}
+function safeStorageSet(kind,key,value){try{const storage=kind==='session'?window.sessionStorage:window.localStorage;storage.setItem(key,value);return true}catch(_e){return false}}
+function safeStorageRemove(kind,key){try{const storage=kind==='session'?window.sessionStorage:window.localStorage;storage.removeItem(key)}catch(_e){}}
 function migrateState(raw){
  const s=structuredCloneSafe(defaults);
- if(!raw||typeof raw!=="object") return s;
- for(const k of ["tripName","startDate","duration","budgetCap","travelers","theme","tripNotes"]) if(raw[k]!==undefined) s[k]=raw[k];
- for(const k of ["days","districtStatus","packing","prep","favorites","diaryEntries"]) if(raw[k]!==undefined) s[k]=raw[k];
+ if(!raw||typeof raw!=='object'||Array.isArray(raw)) return s;
+ for(const k of ['tripName','startDate','duration','budgetCap','travelers','theme','tripNotes','profileNickname']) if(raw[k]!==undefined) s[k]=raw[k];
+ for(const k of ['days','districtStatus','packing','prep','favorites','diaryEntries']) if(raw[k]!==undefined) s[k]=raw[k];
  if(Array.isArray(raw.budgets)&&raw.budgets.length) s.budgets=raw.budgets;
  return s;
 }
-function loadState(){
+function decodeStoredState(rawText){
+ if(!rawText)return null;
  try{
-  const raw=localStorage.getItem("pothchitra-v8")||localStorage.getItem("pothchitra-v7")||sessionStorage.getItem("pothchitra-v8");
-  if(raw)state=migrateState(JSON.parse(raw));
- }catch(e){console.warn("Local save unavailable",e);state=structuredCloneSafe(defaults)}
+  const parsed=JSON.parse(rawText);const isEnvelope=!!(parsed&&parsed.__pothchitraEnvelope===true&&parsed.state&&typeof parsed.state==='object');
+  const candidate=isEnvelope?parsed.state:parsed;
+  if(!candidate||typeof candidate!=='object'||Array.isArray(candidate))return null;
+  return {state:migrateState(candidate),savedAt:isEnvelope&&Number.isFinite(Number(parsed.savedAt))?Number(parsed.savedAt):0};
+ }catch(_e){return null}
+}
+function loadState(){
+ const candidates=[
+  decodeStoredState(safeStorageGet('local','pothchitra-v8')),
+  decodeStoredState(safeStorageGet('local','pothchitra-v7')),
+  decodeStoredState(safeStorageGet('session','pothchitra-v8'))
+ ].filter(Boolean).sort((a,b)=>b.savedAt-a.savedAt);
+ if(candidates.length) state=candidates[0].state;
+ else state=structuredCloneSafe(defaults);
+ // Migrate nickname from the earlier standalone key without losing it.
+ if(!state.profileNickname) state.profileNickname=safeStorageGet('local','pothchitra-profile-nickname')||'';
 }
 function saveState(show=false, refresh=true){
- let saved=true;
- try{localStorage.setItem("pothchitra-v8",JSON.stringify(state));}
- catch(e){saved=false;try{sessionStorage.setItem("pothchitra-v8",JSON.stringify(state));}catch(_e){}}
- if(show)toast(saved?"অগ্রগতি এই ব্রাউজারে সেভ হয়েছে":"স্থায়ী save পাওয়া যায়নি—JSON backup ডাউনলোড করে রাখো");
+ const stamp=Date.now();
+ const envelope=JSON.stringify({__pothchitraEnvelope:true,savedAt:stamp,state});
+ const localSaved=safeStorageSet('local','pothchitra-v8',envelope);
+ const sessionSaved=localSaved?true:safeStorageSet('session','pothchitra-v8',envelope);
+ if(localSaved)safeStorageRemove('session','pothchitra-v8');
+ const saved=localSaved||sessionSaved;
+ if(show)toast(localSaved?'অগ্রগতি এই ব্রাউজারে সেভ হয়েছে':sessionSaved?'অগ্রগতি এই সেশনে সাময়িকভাবে সেভ হয়েছে—ব্রাউজার বন্ধের আগে JSON backup রাখো':'সেভ ব্যর্থ হয়েছে—JSON backup ডাউনলোড করে রাখো');
  if(refresh) updateAll();
+ return saved;
 }
 function toast(msg){
  const el=document.getElementById("toast");el.textContent=msg;el.classList.add("show");
@@ -555,7 +577,7 @@ function showPage(key){
  document.getElementById("crumb").textContent=pageTitles[key][0];
  document.getElementById("pageTitle").textContent=pageTitles[key][1];
  window.scrollTo({top:0,behavior:"smooth"});
- if(key==="districts"&&!mapReady) loadDistrictMap();
+ if(key==="districts"&&!vectorMapReady) loadDistrictMap();
  if(key==="diary")renderDiary();
 }
 function localDay(dayNo){
@@ -584,7 +606,7 @@ function districtCounts(){
 }
 function visitedDistrictCount(){return DISTRICTS.filter(d=>state.districtStatus[d.en]==="visited").length}
 function plannedDistrictCount(){return DISTRICTS.filter(d=>state.districtStatus[d.en]==="planned").length}
-function totalSpent(){return ITINERARY.reduce((s,d)=>s+localDay(d.day).actual,0)}
+function totalSpent(){return selectedItinerary().reduce((s,d)=>s+localDay(d.day).actual,0)}
 function budgetAllocated(){return state.budgets.reduce((s,b)=>s+Number(b.amount||0),0)}
 function updateAll(){
  updateProfileStats();
@@ -598,11 +620,11 @@ function updateAll(){
  document.getElementById("budgetCap").value=state.budgetCap;
  document.getElementById("travelers").value=String(state.travelers||1);
  document.getElementById("tripNotes").value=state.tripNotes||"";
- const spent=totalSpent(),remaining=Number(state.budgetCap)-spent,vis=visitedDistrictCount(),done=ITINERARY.filter(d=>localDay(d.day).status==="done").length;
+ const durationDays=selectedItinerary(),spent=totalSpent(),remaining=Number(state.budgetCap)-spent,vis=visitedDistrictCount(),done=durationDays.filter(d=>localDay(d.day).status==="done").length;
  document.getElementById("statDistricts").textContent=`${bnNum(vis)}/৬৪`;
  document.getElementById("districtProgressBar").style.width=`${vis/64*100}%`;
- document.getElementById("statDays").textContent=`${bnNum(done)}/${bnNum(ITINERARY.length)}`;
- document.getElementById("dayProgressBar").style.width=`${done/ITINERARY.length*100}%`;
+ document.getElementById("statDays").textContent=`${bnNum(done)}/${bnNum(durationDays.length)}`;
+ document.getElementById("dayProgressBar").style.width=`${done/Math.max(1,durationDays.length)*100}%`;
  document.getElementById("statSpent").textContent=fmt(spent);
  document.getElementById("statSpentSub").textContent=`${fmt(Number(state.budgetCap))} বাজেট সীমা`;
  document.getElementById("budgetProgressBar").style.width=`${Math.min(100,spent/Math.max(1,state.budgetCap)*100)}%`;
@@ -614,9 +636,9 @@ function updateAll(){
  document.getElementById("budgetSpentDisplay").textContent=fmt(spent);
  document.getElementById("budgetRemainingDisplay").textContent=fmt(remaining);
  document.getElementById("perPersonDisplay").textContent=fmt(remaining/Math.max(1,Number(state.travelers)||1));
- document.getElementById("dailyMinSum").textContent=fmt(ITINERARY.reduce((s,d)=>s+d.minCost,0));
- document.getElementById("dailyMaxSum").textContent=fmt(ITINERARY.reduce((s,d)=>s+d.maxCost,0));
- document.getElementById("highRangeRemaining").textContent=fmt(Number(state.budgetCap)-ITINERARY.reduce((s,d)=>s+d.maxCost,0));
+ document.getElementById("dailyMinSum").textContent=fmt(durationDays.reduce((s,d)=>s+d.minCost,0));
+ document.getElementById("dailyMaxSum").textContent=fmt(durationDays.reduce((s,d)=>s+d.maxCost,0));
+ document.getElementById("highRangeRemaining").textContent=fmt(Number(state.budgetCap)-durationDays.reduce((s,d)=>s+d.maxCost,0));
  document.getElementById("budgetAllocatedSum").textContent=fmt(budgetAllocated());
  document.getElementById("budgetGap").textContent=fmt(Number(state.budgetCap)-budgetAllocated());
  renderDashboard();renderItinerary();renderDistricts();renderBudget();renderPacking();renderPlaces();
@@ -625,9 +647,12 @@ function updateAll(){
  if(document.getElementById("page-diary")?.classList.contains("active"))renderDiary();
 }
 function renderDashboard(){
- const next=ITINERARY.find(d=>localDay(d.day).status!=="done")||ITINERARY[ITINERARY.length-1];
- const nd=localDay(next.day);
- document.getElementById("nextDayCard").innerHTML=`<div class="day-badge"><small>দিন</small><strong>${bnNum(next.day)}</strong></div><div class="next-content"><strong>${safeText(next.route)}</strong><p>${safeText(dateFor(next.day)||"শুরুর তারিখ সেট হয়নি")} · ${safeText(next.stay)}</p></div><button class="soft-btn" data-day-open="${next.day}">দেখো</button>`;
+ const days=selectedItinerary();
+ const next=days.find(d=>!['done','skipped'].includes(localDay(d.day).status))||days[days.length-1]||ITINERARY[0];
+ const allDone=days.length>0&&days.every(d=>['done','skipped'].includes(localDay(d.day).status));
+ document.getElementById("nextDayCard").innerHTML=allDone
+  ? `<div class="day-badge"><small>দিন</small><strong>✓</strong></div><div class="next-content"><strong>নির্বাচিত মেয়াদ শেষ</strong><p>${bnNum(days.length)} দিনের পরিকল্পনায় আর কোনো অসম্পন্ন দিন নেই।</p></div>`
+  : `<div class="day-badge"><small>দিন</small><strong>${bnNum(next.day)}</strong></div><div class="next-content"><strong>${safeText(next.route)}</strong><p>${safeText(dateFor(next.day)||"শুরুর তারিখ সেট হয়নি")} · ${safeText(next.stay)}</p></div><button class="soft-btn" data-day-open="${next.day}">দেখো</button>`;
  const counts=districtCounts();
  document.getElementById("divisionBars").innerHTML=DIVISION_ORDER.map(div=>{
   const c=counts[div];const vis=c?.visited||0,total=c?.total||0;
@@ -645,7 +670,7 @@ function renderItinerary(){
  });
  document.getElementById("shownDays").textContent=`${bnNum(rows.length)} দিন`;
  document.getElementById("planDateRange").textContent=state.startDate?`${dateFor(1)}–${dateFor(Number(state.duration))}`:"তারিখ বাছাই করো";
- document.getElementById("favoriteCount").textContent=bnNum(ITINERARY.filter(d=>localDay(d.day).favorite).length);
+ document.getElementById("favoriteCount").textContent=bnNum(selectedItinerary().filter(d=>localDay(d.day).favorite).length);
  const list=document.getElementById("itineraryList");
  list.style.display=calendarMode?"none":"grid";
  document.getElementById("calendarView").style.display=calendarMode?"block":"none";
@@ -686,7 +711,7 @@ function openDayModal(dayNo){
 function getDistrict(en){return DISTRICTS.find(d=>d.en===en)}
 function districtStatus(en){return state.districtStatus[en]||"none"}
 function setDistrictStatus(en,status){if(status==="none")delete state.districtStatus[en];else state.districtStatus[en]=status;saveState(false);renderDistrictMapColors();renderDistricts();renderDashboard();if(selectedDistrict===en)renderDistrictDetail(en)}
-function selectDistrict(en){selectedDistrict=en;document.getElementById("districtStatusFilter")?.addEventListener("change",renderDistricts);
+function selectDistrict(en){selectedDistrict=en;
 renderDistricts();renderDistrictDetail(en);renderDistrictMapColors()}
 function renderDistrictDetail(en){
  const d=getDistrict(en);if(!d)return;
@@ -723,12 +748,15 @@ function mapFill(en){
 let vectorMapReady=false;
 function canonicalDistrictName(name){
  const n=String(name||'').toLowerCase().replace(/[^a-z]/g,'');
- const aliases={barisal:'barishal',chittagong:'chattogram',chittagongdistrict:'chattogram',comilla:'cumilla',cumilla:'cumilla',bogra:'bogura',jessore:'jashore',jeshore:'jashore',coxsbazar:'coxsBazar'.toLowerCase(),coxsBazar:'coxsBazar'.toLowerCase(),maulvibazaar:'moulvibazar',maulvibazar:'moulvibazar',moulvibazaar:'moulvibazar',moulvibazar:'moulvibazar',khagrachari:'khagrachhari',nawabganj:'chapainawabganj',chapainawabganj:'chapainawabganj',brahmanbaria:'brahmanbaria',brahamanbaria:'brahmanbaria',brahmanbariya:'brahmanbaria',noakhali:'noakhali',patuakhali:'patuakhali',rangpur:'rangpur',sylhet:'sylhet'};
+ const aliases={netrakona:"netrokona",netrokona:"netrokona",barisal:'barishal',chittagong:'chattogram',chittagongdistrict:'chattogram',comilla:'cumilla',cumilla:'cumilla',bogra:'bogura',jessore:'jashore',jeshore:'jashore',coxsbazar:'coxsBazar'.toLowerCase(),coxsBazar:'coxsBazar'.toLowerCase(),maulvibazaar:'moulvibazar',maulvibazar:'moulvibazar',moulvibazaar:'moulvibazar',moulvibazar:'moulvibazar',khagrachari:'khagrachhari',nawabganj:'chapainawabganj',chapainawabganj:'chapainawabganj',brahmanbaria:'brahmanbaria',brahamanbaria:'brahmanbaria',brahmanbariya:'brahmanbaria',noakhali:'noakhali',patuakhali:'patuakhali',rangpur:'rangpur',sylhet:'sylhet'};
  return aliases[n]||n;
 }
+let activeGeoBounds={minLon:88,maxLon:92.8,minLat:20.5,maxLat:26.7};
 function geoProject(lon,lat){
- const minLon=88.0,maxLon=92.8,minLat=20.5,maxLat=26.7;
- return [((Number(lon)-minLon)/(maxLon-minLon))*1000, ((maxLat-Number(lat))/(maxLat-minLat))*1000];
+ const b=activeGeoBounds,pad=18,w=1000-pad*2,h=1000-pad*2;
+ const x=(Number(lon)-b.minLon)/Math.max(0.000001,b.maxLon-b.minLon);
+ const y=(b.maxLat-Number(lat))/Math.max(0.000001,b.maxLat-b.minLat);
+ return [pad+x*w,pad+y*h];
 }
 function ringPath(ring){return ring.map((c,i)=>{const [x,y]=geoProject(c[0],c[1]);return (i?'L':'M')+x.toFixed(2)+' '+y.toFixed(2)}).join(' ')+' Z'}
 function geometryPath(g){
@@ -742,23 +770,34 @@ function renderVectorMap(data){
  const layer=document.getElementById('districtShapeLayer'); if(!layer)return false;
  const features=data?.features||[]; if(features.length<60)throw new Error('District boundary dataset incomplete');
  const ns='http://www.w3.org/2000/svg'; layer.innerHTML='';
+ const points=[];
+ const collectCoords=value=>{if(!Array.isArray(value))return;if(value.length>=2&&typeof value[0]==='number'&&typeof value[1]==='number'&&Number.isFinite(value[0])&&Number.isFinite(value[1]))points.push(value);else value.forEach(collectCoords)};
+ features.forEach(f=>collectCoords(f?.geometry?.coordinates));
+ if(points.length<100)throw new Error('District geometry coordinates missing');
+ const lons=points.map(c=>c[0]),lats=points.map(c=>c[1]);
+ const minLon=lons.reduce((a,b)=>Math.min(a,b),Infinity),maxLon=lons.reduce((a,b)=>Math.max(a,b),-Infinity),minLat=lats.reduce((a,b)=>Math.min(a,b),Infinity),maxLat=lats.reduce((a,b)=>Math.max(a,b),-Infinity);
+ if(!(maxLon>minLon&&maxLat>minLat))throw new Error('Invalid district map bounds');
+ const padLon=(maxLon-minLon)*0.015,padLat=(maxLat-minLat)*0.015;
+ activeGeoBounds={minLon:minLon-padLon,maxLon:maxLon+padLon,minLat:minLat-padLat,maxLat:maxLat+padLat};
  const distLookup=new Map(DISTRICTS.map(d=>[canonicalDistrictName(d.en),d]));
- let matched=0;
+ const matched=new Set();
  features.forEach(f=>{
   const props=f.properties||{};
   const raw=props.ADM2_EN||props.adm2_en||props.district||props.District||props.name||props.NAME_2||'';
   const d=distLookup.get(canonicalDistrictName(raw)); if(!d)return;
   const path=document.createElementNS(ns,'path');
-  path.setAttribute('d',geometryPath(f.geometry)); path.setAttribute('fill',mapFill(d.en));
+  const dPath=geometryPath(f.geometry);if(!dPath||!/[ML]\s*-?\d/.test(dPath))throw new Error("Invalid geometry for "+d.en);
+  path.setAttribute('d',dPath); path.setAttribute('fill',mapFill(d.en));
   path.setAttribute('stroke','#ffffff');path.setAttribute('stroke-width','1.35');path.setAttribute('vector-effect','non-scaling-stroke');
   path.setAttribute('class','district-shape'+(selectedDistrict===d.en?' selected':''));
   path.setAttribute('data-map-district',d.en);path.setAttribute('tabindex','0');path.setAttribute('role','button');path.setAttribute('aria-label',d.bn+' জেলার অগ্রগতি');
   const title=document.createElementNS(ns,'title');title.textContent=d.bn+' — '+(districtStatus(d.en)==='visited'?'ঘোরা হয়েছে':districtStatus(d.en)==='planned'?'পরিকল্পিত':'বাকি');path.appendChild(title);
   path.addEventListener('click',()=>selectDistrict(d.en));
   path.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();selectDistrict(d.en)}});
-  layer.appendChild(path); matched++;
+  layer.appendChild(path); matched.add(d.en);
  });
- if(matched<60)throw new Error('District names did not match boundary data ('+matched+'). Check district-name aliases.');
+ if(matched.size!==DISTRICTS.length){layer.innerHTML="";throw new Error('Expected 64 unique district boundaries, matched '+matched.size+'. Check dataset and aliases.');}
+ const markerLayer=document.getElementById('markerLayer');if(markerLayer)markerLayer.innerHTML='';
  vectorMapReady=true; mapReady=true;
  const img=document.getElementById('mapRaster'); if(img)img.style.display='none';
  document.getElementById('fallbackLayer').style.display='none';
@@ -827,6 +866,8 @@ async function loadDistrictMap(){
   if(!loaded)throw lastError||new Error('Boundary data unavailable');
  }catch(err){
   console.warn('Vector district map could not load:',err);
+  const shapeLayer=document.getElementById('districtShapeLayer');if(shapeLayer)shapeLayer.innerHTML='';
+  vectorMapReady=false;
   const img=document.getElementById('mapRaster');
   if(img&&img.complete&&img.naturalWidth>0)mapImageLoaded();else mapImageFailed();
  }
@@ -854,7 +895,7 @@ function renderBudget(){
  }).join("");
  document.getElementById("budgetAllocatedSum").textContent=fmt(budgetAllocated());
  const gap=Number(state.budgetCap)-budgetAllocated();document.getElementById("budgetGap").textContent=(gap>=0?"+":"")+fmt(gap);
- const spentDays=ITINERARY.map(d=>({d,actual:localDay(d.day).actual})).filter(x=>x.actual>0);
+ const spentDays=selectedItinerary().map(d=>({d,actual:localDay(d.day).actual})).filter(x=>x.actual>0);
  document.getElementById("costBars").innerHTML=spentDays.length?spentDays.slice(0,12).map(x=>`<div class="division-bar-row" style="grid-template-columns:105px 1fr 80px"><span>দিন ${bnNum(x.d.day)}</span><div class="division-track"><div class="division-fill" style="width:${Math.min(100,x.actual/Math.max(1,state.budgetCap)*100*10)}%"></div></div><strong>${fmt(x.actual)}</strong></div>`).join(""):`<div class="empty"><b>এখনো বাস্তব খরচ লেখা হয়নি</b>ক্যালেন্ডারে প্রতিদিনের খরচ লিখলে এখানে দেখা যাবে।</div>`;
 }
 function renderPacking(){
@@ -913,8 +954,70 @@ function resetDiaryForm(){diaryEditId=null;document.getElementById("diaryForm").
 function saveDiaryEntry(e){e.preventDefault();const title=document.getElementById("diaryTitle").value.trim(),text=document.getElementById("diaryText").value.trim();if(!title||!text){toast("শিরোনাম ও নোট লিখে নাও");return;}const entries=Array.isArray(state.diaryEntries)?state.diaryEntries:[];const prior=entries.find(x=>x.id===diaryEditId);const entry={id:diaryEditId||("diary-"+Date.now()+"-"+Math.random().toString(36).slice(2,7)),title,date:document.getElementById("diaryDate").value||"",district:document.getElementById("diaryDistrict").value||"",photo:document.getElementById("diaryPhoto").value.trim(),text,createdAt:prior?.createdAt||Date.now(),updatedAt:Date.now()};state.diaryEntries=diaryEditId?entries.map(x=>x.id===diaryEditId?entry:x):[entry,...entries];saveState(false);resetDiaryForm();renderDiary();toast("ট্রাভেল ডায়েরি সেভ হয়েছে");}
 function setupDiary(){const select=document.getElementById("diaryDistrict");if(select)select.innerHTML='<option value="">জেলা বেছে নাও</option>'+DISTRICTS.map(d=>`<option value="${safeText(d.bn)}">${safeText(d.bn)}</option>`).join("");document.getElementById("diaryForm")?.addEventListener("submit",saveDiaryEntry);document.getElementById("diaryCancelEdit")?.addEventListener("click",resetDiaryForm);document.getElementById("diarySearch")?.addEventListener("input",renderDiary);}
 
+function validateImportedState(raw){
+ const fail=message=>({ok:false,message});
+ if(!raw||typeof raw!=='object'||Array.isArray(raw))return fail('JSON-এর মূল data object নয়');
+ if(raw.version!==undefined&&(!Number.isInteger(Number(raw.version))||Number(raw.version)<1||Number(raw.version)>8))return fail('এই backup version সমর্থিত নয়');
+ let s=raw.state!==undefined?raw.state:raw;
+ if(!s||typeof s!=='object'||Array.isArray(s))return fail('state object পাওয়া যায়নি');
+ const isObj=v=>v&&typeof v==='object'&&!Array.isArray(v);
+ if(s.profileNickname===undefined&&typeof raw.profileNickname==='string')s={...s,profileNickname:raw.profileNickname};
+ const boundedString=(v,max)=>typeof v==='string'&&v.length<=max;
+ const validIsoDate=v=>{if(typeof v!=='string'||!/^\d{4}-\d{2}-\d{2}$/.test(v))return false;const d=new Date(v+'T12:00:00');return !Number.isNaN(d.getTime())&&d.toISOString().slice(0,10)===v};
+ const finite=(v,min,max)=>typeof v==='number'&&Number.isFinite(v)&&v>=min&&v<=max;
+ if(s.tripName!==undefined&&!boundedString(s.tripName,200))return fail('ট্রিপের নাম সঠিক নয়');
+ if(s.startDate!==undefined&&s.startDate!==''&&(!boundedString(s.startDate,10)||!validIsoDate(s.startDate)))return fail('শুরুর তারিখ সঠিক নয়');
+ if(s.duration!==undefined&&(typeof s.duration!=='number'||![10,30,60,90].includes(s.duration)))return fail('সময়কাল ১০/৩০/৬০/৯০ দিনের একটি number হতে হবে');
+ if(s.budgetCap!==undefined&&!finite(s.budgetCap,0,1000000000))return fail('সর্বোচ্চ বাজেট ০–১,০০০,০০০,০০০-এর মধ্যে number হতে হবে');
+ if(s.travelers!==undefined&&!finite(s.travelers,1,100))return fail('ভ্রমণকারীর সংখ্যা ১–১০০-এর মধ্যে number হতে হবে');
+ if(s.theme!==undefined&&!['light','dark'].includes(s.theme))return fail('থিমের মান সঠিক নয়');
+ if(s.tripNotes!==undefined&&!boundedString(s.tripNotes,10000))return fail('সাধারণ নোট খুব বড় বা সঠিক type নয়');
+ if(s.profileNickname!==undefined&&!boundedString(s.profileNickname,60))return fail('প্রোফাইলের নাম সঠিক নয়');
+ for(const k of ['days','districtStatus','packing','prep'])if(s[k]!==undefined&&!isObj(s[k]))return fail(k+' অবশ্যই object হতে হবে');
+ if(isObj(s.days)){
+  const keys=Object.keys(s.days);if(keys.length>90)return fail('দিনের তালিকায় ৯০টির বেশি key আছে');
+  for(const [key,d] of Object.entries(s.days)){
+   if(!/^(?:[1-9]|[1-8]\d|90)$/.test(key)||!isObj(d)||Object.keys(d).some(k=>!['status','actual','note','favorite'].includes(k)))return fail('দিনের তালিকায় ভুল key, field বা object আছে');
+   if(d.status!==undefined&&!['planned','done','skipped'].includes(d.status))return fail('দিন '+key+'-এর status সঠিক নয়');
+   if(d.actual!==undefined&&!(typeof d.actual==='number'&&Number.isFinite(d.actual)&&d.actual>=0&&d.actual<=100000000))return fail('দিন '+key+'-এর actual cost সঠিক নয়');
+   if(d.note!==undefined&&!boundedString(d.note,10000))return fail('দিন '+key+'-এর note সঠিক নয়');
+   if(d.favorite!==undefined&&typeof d.favorite!=='boolean')return fail('দিন '+key+'-এর favorite true/false হতে হবে');
+  }
+ }
+ if(isObj(s.districtStatus)){
+  if(Object.keys(s.districtStatus).length>64)return fail('জেলার status তালিকায় ৬৪টির বেশি entry');
+  for(const [key,v] of Object.entries(s.districtStatus)){
+   if(!DISTRICTS.some(d=>d.en===key))return fail('অজানা জেলার status key: '+key);
+   if(typeof v==='string'&&!['none','planned','visited'].includes(v))return fail(key+' জেলার status সঠিক নয়');
+   if(isObj(v)&&(!['none','planned','visited'].includes(v.status)||Object.keys(v).some(k=>!['status'].includes(k))))return fail(key+' জেলার status object সঠিক নয়');
+   if(typeof v!=='string'&&!isObj(v))return fail(key+' জেলার status-এর type ভুল');
+  }
+ }
+ for(const k of ['packing','prep'])if(isObj(s[k])){
+  if(Object.keys(s[k]).length>500)return fail(k+' checklist অস্বাভাবিক বড়');
+  for(const [key,v] of Object.entries(s[k]))if(!boundedString(key,120)||typeof v!=='boolean')return fail(k+' checklist-এর item type সঠিক নয়');
+ }
+ if(s.favorites!==undefined){if(!Array.isArray(s.favorites)||s.favorites.length>90)return fail('favorites অবশ্যই সর্বোচ্চ ৯০ item-এর array');if(s.favorites.some(v=>!(typeof v==='string'&&v.length<=120)&&!(typeof v==='number'&&Number.isInteger(v)&&v>=1&&v<=90)))return fail('favorites-এর item type সঠিক নয়');}
+ if(s.diaryEntries!==undefined){
+  if(!Array.isArray(s.diaryEntries)||s.diaryEntries.length>2000)return fail('ডায়েরির তালিকা সঠিক নয় বা অতিরিক্ত বড়');
+  const ids=new Set();
+  for(const e of s.diaryEntries){
+   if(!isObj(e)||!boundedString(e.id,160)||!e.id||ids.has(e.id))return fail('ডায়েরির entry ID ভুল বা duplicate');ids.add(e.id);
+   if(!boundedString(e.title,200)||!e.title.trim()||!boundedString(e.text,10000)||!e.text.trim())return fail('ডায়েরির title/text অবশ্যই non-empty string হতে হবে');
+   for(const [k,max] of [['district',100],['photo',2048],['date',10]])if(e[k]!==undefined&&!boundedString(e[k],max))return fail('ডায়েরি entry-এর '+k+' সঠিক নয়');
+   if(e.date&& !validIsoDate(e.date))return fail('ডায়েরির তারিখ সঠিক নয়');
+   for(const k of ['createdAt','updatedAt'])if(e[k]!==undefined&&!(typeof e[k]==='number'&&Number.isFinite(e[k])&&e[k]>=0))return fail('ডায়েরির timestamp সঠিক নয়');
+  }
+ }
+ if(s.budgets!==undefined){
+  if(!Array.isArray(s.budgets)||s.budgets.length>30)return fail('বাজেট category list সঠিক নয়');
+  for(const b of s.budgets)if(!isObj(b)||!boundedString(b.name,100)||!finite(b.amount,0,1000000000))return fail('বাজেট category-র name string এবং amount number হতে হবে');
+ }
+ return {ok:true,state:migrateState(s)};
+}
+
 function exportJSON(){
- const blob=new Blob([JSON.stringify({version:8,exportedAt:new Date().toISOString(),state},null,2)],{type:"application/json;charset=utf-8"});
+ const blob=new Blob([JSON.stringify({version:8,exportedAt:new Date().toISOString(),profileNickname:state.profileNickname||safeStorageGet('local','pothchitra-profile-nickname')||'',state},null,2)],{type:"application/json;charset=utf-8"});
  downloadBlob(blob,`pothchitra-v8-backup-${new Date().toISOString().slice(0,10)}.json`);
 }
 function downloadBlob(blob,filename){
@@ -922,7 +1025,7 @@ function downloadBlob(blob,filename){
 }
 function exportCSV(which="all"){
  const rows=[["Day","Date","Route","Places","Stay/logistics","Estimated cost","Actual cost","Status","Favorite","Note"]];
- (which==="costs"?ITINERARY.filter(d=>localDay(d.day).actual>0):ITINERARY).forEach(d=>{
+ (which==="costs"?selectedItinerary().filter(d=>localDay(d.day).actual>0):selectedItinerary()).forEach(d=>{
   const x=localDay(d.day);rows.push([d.day,dateFor(d.day),d.route,d.places,d.stay,d.costLabel||`${d.minCost}-${d.maxCost}`,x.actual,x.status,x.favorite?"yes":"no",x.note]);
  });
  const csv="\uFEFF"+rows.map(r=>r.map(v=>`"${String(v??"").replace(/"/g,'""')}"`).join(",")).join("\r\n");
@@ -930,7 +1033,6 @@ function exportCSV(which="all"){
 }
 function syncStartDate(value){state.startDate=value||"";saveState(false)}
 
-const FIREBASE_CONFIG_KEY="pothchitra-firebase-web-config";
 const DEFAULT_FIREBASE_CONFIG={
  apiKey:"AIzaSyD4wkhISggwmWz2daY2zvRikzuyQroy6Vc",
  authDomain:"tasif12.firebaseapp.com",
@@ -940,18 +1042,18 @@ const DEFAULT_FIREBASE_CONFIG={
  messagingSenderId:"429162168319",
  measurementId:"G-V99GPVN50W"
 };
-let firebaseAuth=null, firebaseAuthReady=false;
-function readFirebaseConfig(){try{return {...DEFAULT_FIREBASE_CONFIG,...JSON.parse(localStorage.getItem(FIREBASE_CONFIG_KEY)||"{}")}}catch(e){return {...DEFAULT_FIREBASE_CONFIG}}}
+let firebaseAuth=null, firebaseAuthReady=false, authStateListenerAttached=false;
+function readFirebaseConfig(){return {...DEFAULT_FIREBASE_CONFIG}}
 function initFirebaseAuth(showMessage=false){
  const cfg=readFirebaseConfig();
- if(!cfg.apiKey||!cfg.authDomain||!cfg.projectId||!cfg.appId){setAuthMessage("এখন Google login চালু করা যাচ্ছে না। কিছুক্ষণ পর আবার চেষ্টা কর.");return false}
+ if(!cfg.apiKey||!cfg.authDomain||!cfg.projectId||!cfg.appId){setAuthMessage("Google login চালু করতে Firebase config বসাতে হবে। নিচের Firebase সেটআপ খুলে তথ্য দাও।");return false}
  if(!window.firebase||!firebase.initializeApp){setAuthMessage("Firebase SDK লোড হয়নি। ইন্টারনেট সংযোগ পরীক্ষা করো।");return false}
  try{
   const appName="pothchitra-auth";
   let app=firebase.apps.find(a=>a.name===appName);
   if(!app) app=firebase.initializeApp(cfg,appName);
   firebaseAuth=app.auth();firebaseAuthReady=true;
-  firebaseAuth.onAuthStateChanged(user=>renderProfileUser(user));
+  if(!authStateListenerAttached){firebaseAuth.onAuthStateChanged(user=>renderProfileUser(user));authStateListenerAttached=true;}
   if(showMessage)toast("Firebase config সেভ হয়েছে; Google login চেষ্টা করো");
   return true;
  }catch(e){setAuthMessage("Firebase config যাচাই করা যায়নি: "+(e.message||"unknown error"));return false}
@@ -959,15 +1061,15 @@ function initFirebaseAuth(showMessage=false){
 function setAuthMessage(msg){const el=document.getElementById("authStatus");if(el)el.textContent=msg}
 function renderProfileUser(user){
  const img=document.getElementById("profileAvatar"),initial=document.getElementById("profileInitial"),name=document.getElementById("profileName"),email=document.getElementById("profileEmail"),login=document.getElementById("googleLoginBtn"),logout=document.getElementById("googleLogoutBtn");
- if(user){name.textContent=user.displayName||"পথচিত্র ভ্রমণকারী";email.textContent=user.email||"Google account";setAuthMessage("Google দিয়ে লগইন সফল হয়েছে।");login.hidden=true;logout.hidden=false;
+ if(user){name.textContent=state.profileNickname||user.displayName||"পথচিত্র ভ্রমণকারী";email.textContent=user.email||"Google account";setAuthMessage("Google দিয়ে লগইন সফল হয়েছে।");login.hidden=true;logout.hidden=false;
   if(user.photoURL){img.src=user.photoURL;img.hidden=false;initial.hidden=true}else{img.hidden=true;initial.hidden=false;initial.textContent=(user.displayName||"প").trim().charAt(0).toUpperCase()}
- }else{ name.textContent=localStorage.getItem("pothchitra-profile-nickname")||"তোর পথচিত্র প্রোফাইল";email.textContent="Gmail দিয়ে লগইন করলে নাম ও ইমেইল এখানে দেখা যাবে";img.hidden=true;initial.hidden=false;initial.textContent="প";login.hidden=false;logout.hidden=true; }
+ }else{ name.textContent=state.profileNickname||safeStorageGet("local","pothchitra-profile-nickname")||"তোর পথচিত্র প্রোফাইল";email.textContent="Gmail দিয়ে লগইন করলে নাম ও ইমেইল এখানে দেখা যাবে";img.hidden=true;initial.hidden=false;initial.textContent="প";login.hidden=false;logout.hidden=true; }
  updateProfileStats();
 }
 function updateProfileStats(){
  const visited=Object.values(state.districtStatus||{}).filter(x=>x==="visited"||(x&&x.status==="visited")).length;
  const d=document.getElementById("profileDistrictCount"),n=document.getElementById("profileDiaryCount");if(d)d.textContent=bnNum(visited)+" / ৬৪";if(n)n.textContent=bnNum((state.diaryEntries||[]).length);
- const nick=document.getElementById("profileNickname");if(nick&&document.activeElement!==nick)nick.value=localStorage.getItem("pothchitra-profile-nickname")||"";
+ const nick=document.getElementById("profileNickname");if(nick&&document.activeElement!==nick)nick.value=state.profileNickname||safeStorageGet("local","pothchitra-profile-nickname")||"";
 }
 async function loginWithGoogle(){
  if(!firebaseAuthReady&&!initFirebaseAuth()){
@@ -982,7 +1084,7 @@ function init(){
  setupDiary();
  document.getElementById("googleLoginBtn").onclick=loginWithGoogle;
  document.getElementById("googleLogoutBtn").onclick=async()=>{try{if(firebaseAuth)await firebaseAuth.signOut();toast("লগআউট হয়েছে")}catch(e){setAuthMessage(e.message||"লগআউট হয়নি")}};
- document.getElementById("saveProfileNickname").onclick=()=>{const n=document.getElementById("profileNickname").value.trim();localStorage.setItem("pothchitra-profile-nickname",n);if(!firebaseAuth?.currentUser)document.getElementById("profileName").textContent=n||"তোর পথচিত্র প্রোফাইল";toast("প্রোফাইলের নাম সেভ হয়েছে")};
+ document.getElementById("saveProfileNickname").onclick=()=>{const n=document.getElementById("profileNickname").value.trim().slice(0,60);state.profileNickname=n;safeStorageSet("local","pothchitra-profile-nickname",n);const saved=saveState(false);document.getElementById("profileName").textContent=n||(firebaseAuth?.currentUser?.displayName||"তোর পথচিত্র প্রোফাইল");toast(saved?"প্রোফাইলের নাম সেভ হয়েছে":"Storage-এ সেভ হয়নি");};
  initFirebaseAuth(false);
  document.querySelectorAll("[data-page]").forEach(b=>b.addEventListener("click",()=>showPage(b.dataset.page)));
  document.querySelectorAll("[data-goto]").forEach(b=>b.addEventListener("click",()=>showPage(b.dataset.goto)));
@@ -998,6 +1100,7 @@ function init(){
  document.getElementById("statusFilter").onchange=renderItinerary;
  document.getElementById("itinerarySearch").oninput=renderItinerary;
  document.getElementById("districtSearch").oninput=renderDistricts;
+ document.getElementById("districtStatusFilter").onchange=renderDistricts;
  document.getElementById("placesSearch").oninput=renderPlaces;
  document.getElementById("placeDistrictFilter").onchange=renderPlaces;
  document.getElementById("placeFavoriteFilter").onchange=renderPlaces;
@@ -1010,7 +1113,20 @@ function init(){
  document.getElementById("tripNotes").onchange=e=>{state.tripNotes=e.target.value;saveState(false)};
  document.getElementById("exportTripCsv").onclick=()=>exportCSV("all");
  document.getElementById("clearAll").onclick=()=>{if(confirm("সব দিন, জেলা ও checklist অগ্রগতি মুছে যাবে। এগোবে?")){state=structuredCloneSafe(defaults);selectedDistrict=null;saveState(false);if(mapReady)renderDistrictMapColors();else renderFallbackMarkers();toast("সব অগ্রগতি রিসেট হয়েছে")}};
- document.getElementById("importBackup").onchange=async e=>{const file=e.target.files?.[0];if(!file)return;try{const obj=JSON.parse(await file.text());state=migrateState(obj.state||obj);saveState(false);toast("ব্যাকআপ Restore হয়েছে")}catch(err){toast("এই JSON ফাইলটি পড়া যায়নি")}e.target.value=""};
+ document.getElementById("importBackup").onchange=async e=>{
+  const file=e.target.files?.[0];if(!file)return;
+  try{
+   if(file.size>10*1024*1024)throw new Error('Backup ফাইল ১০ MB-এর বেশি');
+   const obj=JSON.parse(await file.text());const result=validateImportedState(obj);
+   if(!result.ok)throw new Error(result.message);
+   if(!confirm('Restore করলে বর্তমান ব্রাউজারের অগ্রগতি বদলে যাবে। আগে বর্তমান ডেটার JSON backup ডাউনলোড করে তারপর Restore করা হবে। এগোবি?'))return;
+   exportJSON();const previous=state;state=result.state;
+   const saved=saveState(false);
+   if(!saved){state=previous;updateAll();throw new Error('Storage-এ সেভ করা যায়নি; বর্তমান ডেটা ফিরিয়ে রাখা হয়েছে। backup নিরাপদে রেখে আবার চেষ্টা করো');}
+   selectedDistrict=null;renderDiary();toast('Backup যাচাই করে Restore হয়েছে');
+  }catch(err){toast('Restore হয়নি: '+(err.message||'JSON ফাইলটি পড়া যায়নি'));}
+  finally{e.target.value='';}
+ };
  document.getElementById("resetPacking").onclick=()=>{if(confirm("ব্যাকপ্যাক চেকলিস্ট রিসেট করবে?")){state.packing={};saveState(false)}};
  document.getElementById("printPacking").onclick=()=>window.print();
  document.getElementById("globalSearch").onkeydown=e=>{if(e.key==="Enter"){const q=e.target.value;document.getElementById("itinerarySearch").value=q;showPage("planner");renderItinerary()}};
